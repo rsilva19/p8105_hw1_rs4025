@@ -9,6 +9,59 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Problem 0.1
 
-This is part 0.1 of homework 1. 
+# Problem 1
+
+```{r problem 1, echo = FALSE}
+#load packages
+library(tidyverse)
+
+#create data frame
+data_frame = tibble(
+  norm_samp = rnorm(8),
+  norm_samp_log = norm_samp > 0,
+  char_var = as.character(norm_samp), 
+  factor_var =  factor( c( "grp1", "grp2", "grp3", "grp3", "grp2", "grp1", "grp2", "grp3" ))
+)
+
+#try taking mean of each var
+mean(pull (data_frame, norm_samp))
+mean(pull (data_frame, norm_samp_log))
+mean(pull (data_frame, char_var))
+mean(pull (data_frame, factor_var))
+
+#convert vars 
+as.numeric(pull (data_frame, norm_samp_log))
+as.numeric(pull (data_frame, char_var))
+as.numeric(pull (data_frame, factor_var))
+```
+
+When trying to take the mean of each variable before converting, the output for the character and factor vector are 'NA's, and I recieve a warning message. R is able to take the mean of the logical vector because TRUE and FALSE are coded as 1's and 0's, respectively.  
+
+Using 'as.numeric' converts
+* the logicals into integers of 0 (false) and 1 (true).
+* the characters into a numeric value.
+* the factors into the numeric value of their assigned level.
+
+Essentially, the function tries to convert each element of a vector into a number. Without converting the variables into a number, R is unable to take the mean, and therefore we get an error. 
+
+```{r}
+#logical to numeric
+logical_num = as.numeric (pull (data_frame, norm_samp_log))
+
+pull( data_frame, norm_samp) * logical_num
+
+#logical to factor
+logical_factor = as.factor (pull (data_frame, norm_samp_log))
+
+pull( data_frame, norm_samp) * logical_factor #not possible
+
+#logical to factor to numeric
+logical_factor_num = as.numeric( 
+  as.factor( pull (data_frame, norm_samp_log))
+)
+
+pull( data_frame, norm_samp) * logical_factor_num
+
+```
+
