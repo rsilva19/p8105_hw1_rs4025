@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Problem 1
 
-```{r problem 1, echo = FALSE}
+```{r problem 1, results = "hide"}
 #load packages
 library(tidyverse)
 
@@ -36,9 +36,10 @@ as.numeric(pull (df1, char_var))
 as.numeric(pull (df1, factor_var))
 ```
 
-When trying to take the mean of each variable before converting, the output for the character and factor vector are 'NA's, and I recieve a warning message. R is able to take the mean of the logical vector because TRUE and FALSE are coded as 1's and 0's, respectively.  
+When trying to take the mean of each variable before converting, the output for the character and factor vector are 'NA's, and I receive a warning message. R is able to take the mean of the logical vector because TRUE and FALSE are coded as 1's and 0's, respectively.  
 
 Using 'as.numeric' converts
+
  * the logicals into integers of 0 (false) and 1 (true).
  * the characters into a numeric value.
  * the factors into the numeric value of their assigned level.
@@ -47,12 +48,12 @@ Essentially, the function tries to convert each element of a vector into a numbe
 
 ```{r}
 #logical to numeric
-logical_num = as.numeric (pull (df1, norm_samp_log))
+logical_num = as.numeric(pull (df1, norm_samp_log))
 
 pull( df1, norm_samp) * logical_num
 
 #logical to factor
-logical_factor = as.factor (pull (df1, norm_samp_log))
+logical_factor = as.factor(pull (df1, norm_samp_log))
 
 pull( df1, norm_samp) * logical_factor #not possible
 
@@ -81,20 +82,24 @@ df2 = tibble(
 The data frame, 'df2', has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x is `r mean( pull(df2, x))`, the median of x is `r median( pull(df2, x))`, and the standard deviation of x is `r sd( pull(df2, x))`. The proportion of cases for which $x+y > 1$ is `r sum( pull(df2, log_var))/500`. 
 
 ```{r}
-# scatter plot - color by logical 
+# scatter plot 1 - color by logical 
 ggplot(df2, aes(x = x, y = y, color = log_var)) + geom_point()
-
-# scatter plot - color by numeric 
-ggplot(df2, aes(x = x, y = y, color = num_var)) + geom_point()
-
-# scatter plot - color by factor 
-ggplot(df2, aes(x = x, y = y, color = factor_var)) + geom_point()
 
 #export first scatter plot
 ggsave("scatter_plot_hw1.pdf", height = 4, width = 6) 
-# ^ make sure goes to project directory 
+
+# scatter plot 2 - color by numeric 
+ggplot(df2, aes(x = x, y = y, color = num_var)) + geom_point()
+
+# scatter plot 3 - color by factor 
+ggplot(df2, aes(x = x, y = y, color = factor_var)) + geom_point()
+
+
+
 ```
 
-Comment on color scales:
+The color scales for the factor and logical variables are discrete, using two colors to represent 'False'/'True' and '0'/'1', respectively. The color scale for the numeric vector is continuous where darker hues of blue indicate values closer to 0 and lighter hues indicate values of the numeric vector that are closer to 1. 
+
+
 
 
