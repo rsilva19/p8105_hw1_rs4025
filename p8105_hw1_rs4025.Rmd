@@ -65,6 +65,7 @@ pull( df1, norm_samp) * logical_factor_num
 ```
 
 Similar to when we were trying to find the mean of a factor variable, multiplying a numeric variable by a factor variable will no work since multiplication does not work on anything other than a number. 
+
 # Problem 2
 
 ```{r}
@@ -92,12 +93,9 @@ ggplot(df2, aes(x = x, y = y, color = num_var)) + geom_point()
 
 # scatter plot 3 - color by factor 
 ggplot(df2, aes(x = x, y = y, color = factor_var)) + geom_point()
-
-
-
 ```
 
-The color scales for the factor and logical variables are discrete, using two colors to represent 'False'/'True' and '0'/'1', respectively. The color scale for the numeric vector is continuous where darker hues of blue indicate values closer to 0 and lighter hues indicate values of the numeric vector that are closer to 1. 
+The color scales for the factor and logical variables are discrete, using two colors to represent 'False'/'True' and '0'/'1', respectively. The color scale for the numeric vector is continuous; darker hues of blue indicate values closer to 0 and lighter hues indicate values of the numeric vector that are closer to 1. 
 
 
 
