@@ -95,7 +95,7 @@ ggplot(df2, aes(x = x, y = y, color = num_var)) + geom_point()
 ggplot(df2, aes(x = x, y = y, color = factor_var)) + geom_point()
 ```
 
-The color scales for the factor and logical variables are discrete, using two colors to represent 'False'/'True' and '0'/'1', respectively. The color scale for the numeric vector is continuous; darker hues of blue indicate values closer to 0 and lighter hues indicate values of the numeric vector that are closer to 1. 
+The color scales for the factor and logical variables are discrete, using two colors to represent 'False' and 'True' with red and blue, respectively. The color scale for the numeric vector is continuous; darker hues of blue indicate values closer to 0 and lighter hues indicate values of the numeric vector that are closer to 1. 
 
 
 
