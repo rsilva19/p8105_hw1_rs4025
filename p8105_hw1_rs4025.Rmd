@@ -53,11 +53,13 @@ pull( df1, norm_samp) * logical_num
 
 #logical to factor
 logical_factor = as.factor(pull (df1, norm_samp_log))
+# multiply rand samp by result
 pull( df1, norm_samp) * logical_factor #not possible
 
 #logical to factor to numeric
 logical_factor_num = as.numeric( 
   as.factor( pull (df1, norm_samp_log)))
+# multiply rand samp by result
 pull( df1, norm_samp) * logical_factor_num
 ```
 
