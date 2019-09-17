@@ -1,7 +1,6 @@
 ---
 title: "p8105_hw1_rs4025"
 author: "Rebecca Silva"
-date: "9/12/2019"
 output: github_document
 ---
 
@@ -25,8 +24,7 @@ df1 = tibble(
 ```
 
 
-```{r, results = 'hide'}
-# Q: should we show results)
+```{r, warning = FALSE }
 #try taking mean of each var
 mean(pull (df1, norm_samp))
 mean(pull (df1, norm_samp_log))
@@ -34,7 +32,7 @@ mean(pull (df1, char_var))
 mean(pull (df1, factor_var))
 ```
 
-When trying to take the mean of each variable before converting, the output for the character and factor vector are NA's, and I receive a warning message. We can obtain a mean for the numeric vector, as it is numeric, and the logical vector because TRUE and FALSE are converted to values 1 and 0, respectively, when used in a function.  
+When trying to take the mean of each variable before converting, the output for the character and factor vector are NA's, and I receive a warning message. We can obtain a mean for the numeric vector, as it is numeric, and the logical vector because TRUE and FALSE are converted to values 1 and 0, respectively, when used in the function.  
 
 ```{r, results = 'hide'}
 #convert vars 
@@ -43,15 +41,11 @@ as.numeric(pull (df1, char_var))
 as.numeric(pull (df1, factor_var))
 ```
 
-Using 'as.numeric' converts
-
- * the logicals into integers of 0 (false) and 1 (true).
- * the characters into a numeric value.
- * the factors into the numeric value of their assigned level.
+Using 'as.numeric' converts the logicals into integers of 0 (false) and 1 (true). It tries to convert the characters into a numeric value, if it cannot, it assigns the object into an 'NA'. In my example, the characters are in the form "1.235" so it is converted to the number 1.235. However, if the character is "Hi", for example, the numeric conversion would be NA. Lastly, the as.numeric function converts the factors into the numeric value of their assigned level.
 
 Essentially, the function tries to convert each element of the vector into a number. Without converting the variables into a number, R is unable to take the mean, and therefore we get an error. 
 
-```{r}
+```{r, warning = FALSE}
 #logical to numeric
 logical_num = as.numeric(pull (df1, norm_samp_log))
 pull( df1, norm_samp) * logical_num
@@ -66,7 +60,7 @@ logical_factor_num = as.numeric(
 pull( df1, norm_samp) * logical_factor_num
 ```
 
-Similar to when we were trying to find the mean of a factor variable, multiplying a numeric variable by a factor variable will no work since multiplication does not work on anything other than a number. 
+Similar to when we were trying to find the mean of a factor variable, multiplying a numeric variable by a factor variable will not work since multiplication does not work on anything other than a number. 
 
 # Problem 2
 
@@ -81,7 +75,7 @@ df2 = tibble(
 )
 ```
 
-The data frame, 'df2', has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x is `r mean( pull(df2, x))`, the median of x is `r median( pull(df2, x))`, and the standard deviation of x is `r sd( pull(df2, x))`. The proportion of cases for which $x+y > 1$ is `r sum( pull(df2, log_var))/500`. 
+The data frame, 'df2', has `r nrow(df2)` rows and `r ncol(df2)` columns. The mean of x is about `r mean( pull(df2, x))`, the median of x is about `r median( pull(df2, x))`, and the standard deviation of x is about `r sd( pull(df2, x))`. The proportion of cases for which x+y > 1 is `r sum( pull(df2, log_var))/500`. 
 
 ```{r}
 # scatter plot 1 - color by logical 
