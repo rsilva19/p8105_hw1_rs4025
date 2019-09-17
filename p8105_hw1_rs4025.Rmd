@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Problem 1
 
-```{r problem 1, results = "hide"}
+```{r problem 1, message = FALSE}
 #load packages
 library(tidyverse)
 
@@ -29,14 +29,16 @@ mean(pull (df1, norm_samp))
 mean(pull (df1, norm_samp_log))
 mean(pull (df1, char_var))
 mean(pull (df1, factor_var))
+```
 
+When trying to take the mean of each variable before converting, the output for the character and factor vector are NA's, and I receive a warning message. We can obtain a mean for the numeric vector, as it is numeric, and the logical vector because TRUE and FALSE are converted to values 1 and 0, respectively, when used in a function.  
+
+```{r, results = 'hide'}
 #convert vars 
 as.numeric(pull (df1, norm_samp_log))
 as.numeric(pull (df1, char_var))
 as.numeric(pull (df1, factor_var))
 ```
-
-When trying to take the mean of each variable before converting, the output for the character and factor vector are 'NA's, and I receive a warning message. R is able to take the mean of the logical vector because TRUE and FALSE are coded as 1's and 0's, respectively.  
 
 Using 'as.numeric' converts
 
@@ -44,28 +46,25 @@ Using 'as.numeric' converts
  * the characters into a numeric value.
  * the factors into the numeric value of their assigned level.
 
-Essentially, the function tries to convert each element of a vector into a number. Without converting the variables into a number, R is unable to take the mean, and therefore we get an error. 
+Essentially, the function tries to convert each element of the vector into a number. Without converting the variables into a number, R is unable to take the mean, and therefore we get an error. 
 
 ```{r}
 #logical to numeric
 logical_num = as.numeric(pull (df1, norm_samp_log))
-
 pull( df1, norm_samp) * logical_num
 
 #logical to factor
 logical_factor = as.factor(pull (df1, norm_samp_log))
-
 pull( df1, norm_samp) * logical_factor #not possible
 
 #logical to factor to numeric
 logical_factor_num = as.numeric( 
-  as.factor( pull (df1, norm_samp_log))
-)
-
+  as.factor( pull (df1, norm_samp_log)))
 pull( df1, norm_samp) * logical_factor_num
 
 ```
 
+Similar to when we were trying to find the mean of a factor variable, multiplying a numeric variable by a factor variable will no work since multiplication does not work on anything other than a number. 
 # Problem 2
 
 ```{r}
