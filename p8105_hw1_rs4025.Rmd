@@ -82,16 +82,25 @@ The data frame, 'df2', has `r nrow(df2)` rows and `r ncol(df2)` columns. The mea
 
 ```{r}
 # scatter plot 1 - color by logical 
-ggplot(df2, aes(x = x, y = y, color = log_var)) + geom_point()
+ggplot(df2, aes(x = x, y = y, color = log_var)) + 
+  geom_point() + 
+  ggtitle("Y vs X") +
+  theme(plot.title = element_text(hjust = 0.5))
 
 #export first scatter plot
 ggsave("scatter_plot_hw1.pdf", height = 4, width = 6) 
 
 # scatter plot 2 - color by numeric 
-ggplot(df2, aes(x = x, y = y, color = num_var)) + geom_point()
+ggplot(df2, aes(x = x, y = y, color = num_var)) + 
+  geom_point() + 
+  ggtitle("Y vs X") +
+  theme(plot.title = element_text(hjust = 0.5))
 
 # scatter plot 3 - color by factor 
-ggplot(df2, aes(x = x, y = y, color = factor_var)) + geom_point()
+ggplot(df2, aes(x = x, y = y, color = factor_var)) + 
+  geom_point() + 
+  ggtitle("Y vs X") +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 The color scales for the factor and logical variables are discrete, using two colors to represent 'False' and 'True' with red and blue, respectively. The color scale for the numeric vector is continuous; darker hues of blue indicate values closer to 0 and lighter hues indicate values of the numeric vector that are closer to 1. 
